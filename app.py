@@ -4,27 +4,32 @@ import plotly_express as px
 
 vehicles = pd.read_csv('./vehicles_us.csv')
 
-st.title('Vehicle Data Analysis')
+# Checkbox to toggle behavior
+show_histogram = st.checkbox("Show Histogram")
 
-# Header with text
-st.header('Overview of Vehicle Data')
+# Alpha slider for scatter plot
+alpha_value = st.slider("Select Alpha Value", min_value=0.1, max_value=1.0, value=0.8, step=0.1)
 
-# Checkbox to toggle visibility of histograms
-show_histograms = st.checkbox('Show Histograms')
+# Header
+st.header("Data Analysis Dashboard")
 
-if show_histograms:
-    # Plotly Express histogram for 'price'
-    fig_price = px.histogram(vehicles, x='price', nbins=50, title='Distribution of Prices')
+# Histogram for 'price'
+if show_histogram:
+    fig_price = px.histogram(vehicles, x='price', nbins=50, title='Distribution of Prices',
+                             labels={'price': 'Price', 'count': 'Frequency'})
     st.plotly_chart(fig_price)
 
-    # Plotly Express histogram for 'model_year'
-    fig_model_year = px.histogram(vehicles.dropna(subset=['model_year']), x='model_year', nbins=20, title='Distribution of Model Years')
-    st.plotly_chart(fig_model_year)
+# Scatter plot for 'odometer' vs. 'price' with alpha slider
+fig_scatter = px.scatter(vehicles, x='odometer', y='price', title='Scatter Plot: Odometer vs. Price',
+                         labels={'odometer': 'Odometer', 'price': 'Price'})
+fig_scatter.update_traces(marker=dict(opacity=alpha_value))
+st.plotly_chart(fig_scatter)
 
-# Checkbox to toggle visibility of scatter plot
-show_scatter_plot = st.checkbox('Show Scatter Plot')
+# Plotly Express histogram for the most common month posted
+fig_month_posted = px.histogram(vehicles, x='month_posted', title='Distribution of Months Posted')
+st.plotly_chart(fig_month_posted)
 
-if show_scatter_plot:
-    # Plotly Express scatter plot for 'odometer' vs. 'price'
-    fig_scatter = px.scatter(vehicles, x='odometer', y='price', title='Scatter Plot: Odometer vs. Price')
-    st.plotly_chart(fig_scatter)
+# Distribution of Odometer Mileage
+fig_odometer = px.histogram(vehicles, x='odometer', nbins=20, title='Histogram: Distribution of Odometer Mileage',
+                            labels={'odometer': 'Odometer (Mileage)', 'count': 'Frequency'})
+st.plotly_chart(fig_odometer)
