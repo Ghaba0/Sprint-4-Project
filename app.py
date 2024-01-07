@@ -64,7 +64,7 @@ if show_histogram_month:
 # Count of vehicles by brand using Altair (Bar Chart)
 if show_brand_count:
     fig_brand_count = alt.Chart(vehicles).mark_bar().encode(
-        alt.X('brand:N', title='Brand'),
+        alt.X('brand:N', title='Brand', axis=alt.Axis(labelAngle=45)),
         alt.Y('count()', title='Number of Vehicles'),
         tooltip=['count()']
     ).properties(
