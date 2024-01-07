@@ -24,10 +24,12 @@ This Streamlit dashboard provides visualizations and insights into a dataset of 
    git clone https://github.com/Ghaba0/Sprint-4-Project
    
 2. Install Dependencies:
-pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
 
-Run the Dashboard:
-streamlit run your_dashboard_script.py
+3. Run the Dashboard:
+   ```bash
+   streamlit run your_dashboard_script.py
 
 Access the Dashboard:
 Open your web browser and navigate to http://localhost:8501.
