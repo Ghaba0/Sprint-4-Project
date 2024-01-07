@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import altair
 
-vehicles = pd.read_csv('C:\\Users\\Coop\\Documents\\Datasets\\vehicles_us.csv')
+vehicles = pd.read_csv('.\\vehicles_us.csv')
 
 vehicles['is_4wd'].fillna(0.0, inplace=True)
 vehicles.dropna()
